@@ -37,7 +37,7 @@
      id="namedview128"
      showgrid="false"
      inkscape:zoom="2"
-     inkscape:cx="-238.41187"
+     inkscape:cx="-307.41187"
      inkscape:cy="155.68565"
      inkscape:window-x="0"
      inkscape:window-y="36"
@@ -419,7 +419,7 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="components"
-     style="display:inline">
+     style="display:none">
     <circle
        style="fill:#0000ff;stroke-width:0.66551232;image-rendering:auto"
        id="circle887"
