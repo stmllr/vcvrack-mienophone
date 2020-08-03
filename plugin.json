@@ -1,0 +1,16 @@
+{
+  "slug": "mienophone",
+  "name": "mienophone",
+  "version": "0.0.1",
+  "license": "GPL-3.0-or-later",
+  "brand": "mienophone",
+  "author": "stmllr",
+  "authorEmail": "",
+  "authorUrl": "",
+  "pluginUrl": "",
+  "manualUrl": "https://github.com/stmllr/vcvrack-mienophone/blob/master/README",
+  "sourceUrl": "https://github.com/stmllr/vcvrack-mienophone",
+  "donateUrl": "",
+  "changelogUrl": "",
+  "modules": []
+}
