@@ -12,5 +12,14 @@
   "sourceUrl": "https://github.com/stmllr/vcvrack-mienophone",
   "donateUrl": "",
   "changelogUrl": "",
-  "modules": []
+  "modules": [
+    {
+      "slug": "Mienophone",
+      "name": "Mienophone",
+      "description": "",
+      "tags": [
+        "Controller"
+      ]
+    }
+  ]
 }
