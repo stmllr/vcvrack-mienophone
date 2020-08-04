@@ -8,11 +8,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg4352"
-   viewBox="0 0 38.399998 485.66928"
+   viewBox="0 0 20.319999 128.5"
    version="1.1"
    sodipodi:docname="Mienophone.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   width="10.16mm"
+   width="20.32mm"
    height="128.5mm">
   <metadata
      id="metadata130">
@@ -39,9 +39,9 @@
      inkscape:window-height="1007"
      id="namedview128"
      showgrid="false"
-     inkscape:zoom="5.6568542"
-     inkscape:cx="-37.88242"
-     inkscape:cy="6.2513714"
+     inkscape:zoom="2"
+     inkscape:cx="43.72288"
+     inkscape:cy="349.27599"
      inkscape:window-x="0"
      inkscape:window-y="36"
      inkscape:window-maximized="1"
@@ -67,7 +67,7 @@
      transform="translate(0,121.41928)">
     <g
        id="layer1"
-       transform="matrix(0.89372352,0,0,1.3333405,-0.20885642,-121.41929)">
+       transform="matrix(0.47037036,0,0,0.35277967,0,-121.41928)">
       <path
          id="path102534"
          class="cls-1"
@@ -430,60 +430,60 @@
      style="display:none"
      transform="translate(0,121.41928)">
     <circle
-       style="fill:#0000ff;stroke-width:0.66551232;image-rendering:auto"
+       style="fill:#0000ff;stroke-width:0.33275616;image-rendering:auto"
        id="circle887"
-       cx="19.193882"
-       cy="-49.238903"
+       cx="10.21174"
+       cy="-102.32156"
        inkscape:label="anger"
-       r="4" />
+       r="2" />
     <circle
-       style="display:inline;fill:#0000ff;stroke-width:0.66551232"
+       style="display:inline;fill:#0000ff;stroke-width:0.33275616"
        id="circle888"
-       cx="19.193882"
-       cy="4.3480525"
+       cx="10.21174"
+       cy="-88.143341"
        inkscape:label="contempt"
-       r="4" />
+       r="2" />
     <circle
-       style="display:inline;fill:#0000ff;stroke-width:0.66551232"
+       style="display:inline;fill:#0000ff;stroke-width:0.33275616"
        id="circle889"
-       cx="19.193882"
-       cy="57.935009"
+       cx="10.21174"
+       cy="-73.965126"
        inkscape:label="disgust"
-       r="4" />
+       r="2" />
     <circle
-       style="display:inline;fill:#0000ff;stroke-width:0.66551232"
+       style="display:inline;fill:#0000ff;stroke-width:0.33275616"
        id="circle890"
-       cx="19.193882"
-       cy="111.58863"
+       cx="10.21174"
+       cy="-59.769268"
        inkscape:label="fear"
-       r="4" />
+       r="2" />
     <circle
-       style="display:inline;fill:#0000ff;stroke-width:0.66551232"
+       style="display:inline;fill:#0000ff;stroke-width:0.33275616"
        id="circle891"
-       cx="19.193882"
-       cy="165.10892"
+       cx="10.21174"
+       cy="-45.608692"
        inkscape:label="happyness"
-       r="4" />
+       r="2" />
     <circle
-       style="display:inline;fill:#0000ff;stroke-width:0.66551232"
+       style="display:inline;fill:#0000ff;stroke-width:0.33275616"
        id="circle892"
-       cx="19.193882"
-       cy="218.69588"
+       cx="10.21174"
+       cy="-31.430477"
        inkscape:label="neutral"
-       r="4" />
+       r="2" />
     <circle
-       style="display:inline;fill:#0000ff;stroke-width:0.66551232"
+       style="display:inline;fill:#0000ff;stroke-width:0.33275616"
        id="circle893"
-       cx="19.193882"
-       cy="272.26282"
+       cx="10.21174"
+       cy="-17.257555"
        inkscape:label="sadness"
-       r="4" />
+       r="2" />
     <circle
-       style="display:inline;fill:#0000ff;stroke-width:0.66551232"
+       style="display:inline;fill:#0000ff;stroke-width:0.33275616"
        id="circle894"
-       cx="19.193882"
-       cy="325.86978"
+       cx="10.21174"
+       cy="-3.074048"
        inkscape:label="surprise"
-       r="4" />
+       r="2" />
   </g>
 </svg>
