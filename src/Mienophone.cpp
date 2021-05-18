@@ -180,14 +180,14 @@ struct MienophoneWidget : ModuleWidget {
 		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 20.667)), module, Mienophone::ANGER_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 35.483)), module, Mienophone::CONTEMPT_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 49.639)), module, Mienophone::DISGUST_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 62.994)), module, Mienophone::FEAR_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 77.684)), module, Mienophone::HAPPYNESS_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 92.651)), module, Mienophone::NEUTRAL_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 106.015)), module, Mienophone::SADNESS_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 119.637)), module, Mienophone::SURPRISE_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 21.0)), module, Mienophone::ANGER_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 35.1)), module, Mienophone::CONTEMPT_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 49.2)), module, Mienophone::DISGUST_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 63.3)), module, Mienophone::FEAR_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 77.4)), module, Mienophone::HAPPYNESS_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 91.5)), module, Mienophone::NEUTRAL_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 105.6)), module, Mienophone::SADNESS_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 119.7)), module, Mienophone::SURPRISE_OUTPUT));
 	}
 };
 
