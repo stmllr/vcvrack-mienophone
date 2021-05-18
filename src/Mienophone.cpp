@@ -28,6 +28,14 @@ struct Mienophone : Module {
 		NUM_OUTPUTS
 	};
 	enum LightIds {
+		ANGER_LIGHT,
+		CONTEMPT_LIGHT,
+		DISGUST_LIGHT,
+		FEAR_LIGHT,
+		HAPPYNESS_LIGHT,
+		NEUTRAL_LIGHT,
+		SADNESS_LIGHT,
+		SURPRISE_LIGHT,
 		NUM_LIGHTS
 	};
 
@@ -87,6 +95,14 @@ struct Mienophone : Module {
 		outputs[NEUTRAL_OUTPUT].setVoltage(currentEmotions.neutral);
 		outputs[SADNESS_OUTPUT].setVoltage(currentEmotions.sadness);
 		outputs[SURPRISE_OUTPUT].setVoltage(currentEmotions.surprise);
+
+		for (int i = 0; i < NUM_LIGHTS; i++) {
+			if (outputs[i].isConnected()) {
+				lights[i].setBrightness(outputs[i].getVoltage());
+			} else {
+				lights[i].setBrightness(0.0);
+			}
+		}
 	}
 
 	void setEmotion(emotions *currentEmotions) {
@@ -188,6 +204,15 @@ struct MienophoneWidget : ModuleWidget {
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 91.5)), module, Mienophone::NEUTRAL_OUTPUT));
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 105.6)), module, Mienophone::SADNESS_OUTPUT));
 		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 119.7)), module, Mienophone::SURPRISE_OUTPUT));
+
+		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 20.0)), module, Mienophone::ANGER_LIGHT));
+		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 34.1)), module, Mienophone::CONTEMPT_LIGHT));
+		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 48.2)), module, Mienophone::DISGUST_LIGHT));
+		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 62.3)), module, Mienophone::FEAR_LIGHT));
+		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 76.4)), module, Mienophone::HAPPYNESS_LIGHT));
+		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 90.5)), module, Mienophone::NEUTRAL_LIGHT));
+		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 104.6)), module, Mienophone::SADNESS_LIGHT));
+		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 118.7)), module, Mienophone::SURPRISE_LIGHT));
 	}
 };
 
