@@ -8,7 +8,6 @@
 
 #define FACE_API "http://localhost:8080/face/v1.0/detect"
 #define BUFFER_SIZE (256 * 1024) /* 256 KB */
-#define SAMPLE_RATE 44100
 
 struct Mienophone : Module {
 	enum ParamIds {
@@ -76,7 +75,7 @@ struct Mienophone : Module {
 
 	void process(const ProcessArgs& args) override {
 
-		if (counter++ % SAMPLE_RATE == 0) {
+		if (counter++ % (long) args.sampleRate == 0) {
 			setEmotion(&currentEmotions);
 		}
 
