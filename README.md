@@ -1,5 +1,25 @@
 # VCV Plugin for Mienophone
 
+
+## Dependencies
+
+* build-essential
+* libcurl-dev
+
+```
+apt install libcurl4-openssl-dev build-essential
+```
+
+## Build and Installation
+
+export RACK_DIR=$HOME/Projects/vcvrack/Rack-SDK
+
+```
+make
+make dist
+make install
+```
+
 ## Fake API
 
 ```

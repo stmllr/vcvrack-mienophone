@@ -9,4 +9,4 @@ RUN echo '.json:application/json' >> /etc/httpd.conf
 
 USER nobody
 EXPOSE 8080
-CMD httpd -p 8080 -f -h ${http_dir} -c /etc/httpd.conf
+CMD httpd -p 8080 -f -v -h ${http_dir} -c /etc/httpd.conf
