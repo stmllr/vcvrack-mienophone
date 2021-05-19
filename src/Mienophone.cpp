@@ -196,23 +196,17 @@ struct MienophoneWidget : ModuleWidget {
 		addChild(createWidget<ScrewSilver>(Vec(RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 		addChild(createWidget<ScrewSilver>(Vec(box.size.x - 2 * RACK_GRID_WIDTH, RACK_GRID_HEIGHT - RACK_GRID_WIDTH)));
 
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 21.0)), module, Mienophone::ANGER_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 35.1)), module, Mienophone::CONTEMPT_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 49.2)), module, Mienophone::DISGUST_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 63.3)), module, Mienophone::FEAR_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 77.4)), module, Mienophone::HAPPYNESS_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 91.5)), module, Mienophone::NEUTRAL_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 105.6)), module, Mienophone::SADNESS_OUTPUT));
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(10.153, 119.7)), module, Mienophone::SURPRISE_OUTPUT));
+		float outputX = 10.153;
+		double outputY[] = {21.0, 35.1, 49.2, 63.3, 77.4, 91.5, 105.6, 119.7};
 
-		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 20.0)), module, Mienophone::ANGER_LIGHT));
-		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 34.1)), module, Mienophone::CONTEMPT_LIGHT));
-		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 48.2)), module, Mienophone::DISGUST_LIGHT));
-		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 62.3)), module, Mienophone::FEAR_LIGHT));
-		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 76.4)), module, Mienophone::HAPPYNESS_LIGHT));
-		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 90.5)), module, Mienophone::NEUTRAL_LIGHT));
-		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 104.6)), module, Mienophone::SADNESS_LIGHT));
-		addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(9, 118.7)), module, Mienophone::SURPRISE_LIGHT));
+		float lightX = 9;
+		double lightY[] = {20.0, 34.1, 48.2, 62.3, 76.4, 90.5,104.6, 118.7};
+
+		for (int output = 0; output < Mienophone::NUM_OUTPUTS; output++) {
+			addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(outputX, outputY[output])), module, output));
+			addChild(createLight<SmallLight<GreenLight>>(mm2px(Vec(lightX, lightY[output])), module, output));
+
+		}
 	}
 };
 
