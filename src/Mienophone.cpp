@@ -8,6 +8,7 @@
 
 #define FACE_API "http://localhost:8080/face/v1.0/detect"
 #define BUFFER_SIZE (256 * 1024) /* 256 KB */
+#define BPM 120
 
 struct Mienophone : Module {
 	enum ParamIds {
@@ -21,7 +22,7 @@ struct Mienophone : Module {
 		CONTEMPT_OUTPUT,
 		DISGUST_OUTPUT,
 		FEAR_OUTPUT,
-		HAPPYNESS_OUTPUT,
+		HAPPINESS_OUTPUT,
 		NEUTRAL_OUTPUT,
 		SADNESS_OUTPUT,
 		SURPRISE_OUTPUT,
@@ -32,7 +33,7 @@ struct Mienophone : Module {
 		CONTEMPT_LIGHT,
 		DISGUST_LIGHT,
 		FEAR_LIGHT,
-		HAPPYNESS_LIGHT,
+		HAPPINESS_LIGHT,
 		NEUTRAL_LIGHT,
 		SADNESS_LIGHT,
 		SURPRISE_LIGHT,
@@ -44,7 +45,7 @@ struct Mienophone : Module {
 		CONTEMPT,
 		DISGUST,
 		FEAR,
-		HAPPYNESS,
+		HAPPINESS,
 		NEUTRAL,
 		SADNESS,
 		SURPRISE,
@@ -82,7 +83,10 @@ struct Mienophone : Module {
 	float emotions[8] = {0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000};
 
 	void process(const ProcessArgs& args) override {
-		if (counter++ % (long) args.sampleRate == 0) {
+		// BPM 120
+		// BPM / 60 = 2
+		// args.sampleRate / BPM/2
+		if (counter++ % (long) (args.sampleRate / (BPM / 60)) == 0) {
 			setEmotions(emotions);
 		}
 
@@ -135,41 +139,51 @@ struct Mienophone : Module {
 		else {
 			json_error_t error;
 			size_t flags = 0;
-			json_t *json = json_loads(chunk.memory, flags, &error);
+			json_t *root = json_loads(chunk.memory, flags, &error);
 			json_t *obj;
 			const char *key;
 
-			if (json_is_object(json)) {
-				json_object_foreach(json, key, obj){
-					double value = json_number_value(obj);
-					value = value * 10;
-					printf("%s => %lf\n", key, value);
+			// [{"faceAttributes":{"emotion":{"anger":0.986, ... }}}]
+			if (json_is_array(root)) {
+				json_t *face = json_array_get(root, 0);
+				if (json_is_object(face)) {
+					json_t *faceAttributes = json_object_get(face, "faceAttributes");
+					if (json_is_object(faceAttributes)) {
+						json_t *faceEmotion = json_object_get(faceAttributes, "emotion");
+						if (json_is_object(faceEmotion)) {
+							json_object_foreach(faceEmotion, key, obj){
+								double value = json_number_value(obj);
+								value = value * 10;
+								printf("%s => %lf\n", key, value);
 
-					if(!strcmp(key, "anger")) {
-						emotions[Mienophone::ANGER] = (float) value;
+								if(!strcmp(key, "anger")) {
+									emotions[Mienophone::ANGER] = (float) value;
+								}
+								if(!strcmp(key, "contempt")) {
+									emotions[Mienophone::CONTEMPT] = (float) value;
+								}
+								if(!strcmp(key, "disgust")) {
+									emotions[Mienophone::DISGUST] = (float) value;
+								}
+								if(!strcmp(key, "fear")) {
+									emotions[Mienophone::FEAR] = (float) value;
+								}
+								if(!strcmp(key, "happiness")) {
+									emotions[Mienophone::HAPPINESS] = (float) value;
+								}
+								if(!strcmp(key, "neutral")) {
+									emotions[Mienophone::NEUTRAL] = (float) value;
+								}
+								if(!strcmp(key, "sadness")) {
+									emotions[Mienophone::SADNESS] = (float) value;
+								}
+								if(!strcmp(key, "surprise")) {
+									emotions[Mienophone::SURPRISE] = (float) value;
+								}
+							}
+						}
 					}
-					if(!strcmp(key, "contempt")) {
-						emotions[Mienophone::CONTEMPT] = (float) value;
-					}
-					if(!strcmp(key, "disgust")) {
-						emotions[Mienophone::DISGUST] = (float) value;
-					}
-					if(!strcmp(key, "fear")) {
-						emotions[Mienophone::FEAR] = (float) value;
-					}
-					if(!strcmp(key, "happyness")) {
-						emotions[Mienophone::HAPPYNESS] = (float) value;
-					}
-					if(!strcmp(key, "neutral")) {
-						emotions[Mienophone::NEUTRAL] = (float) value;
-					}
-					if(!strcmp(key, "sadness")) {
-						emotions[Mienophone::SADNESS] = (float) value;
-					}
-					if(!strcmp(key, "surprise")) {
-						emotions[Mienophone::SURPRISE] = (float) value;
-					}
-				}
+				}	
 			}
 		}
 
