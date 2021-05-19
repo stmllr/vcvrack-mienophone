@@ -39,6 +39,18 @@ struct Mienophone : Module {
 		NUM_LIGHTS
 	};
 
+	enum Emotions {
+		ANGER,
+		CONTEMPT,
+		DISGUST,
+		FEAR,
+		HAPPYNESS,
+		NEUTRAL,
+		SADNESS,
+		SURPRISE,
+		NUMS
+	};
+
 	Mienophone() {
 		config(NUM_PARAMS, NUM_INPUTS, NUM_OUTPUTS, NUM_LIGHTS);
 	}
@@ -66,35 +78,17 @@ struct Mienophone : Module {
 		return realsize;
 	}
 
-	struct emotions {
-		// 0.0 to 10.0
-		float anger;
-		float contempt;
-		float disgust;
-		float fear;
-		float happyness;
-		float neutral;
-		float sadness;
-		float surprise;
-	};
-
-	emotions currentEmotions;
 	unsigned long counter = 0;
+	float emotions[8] = {0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000};
 
 	void process(const ProcessArgs& args) override {
-
 		if (counter++ % (long) args.sampleRate == 0) {
-			setEmotion(&currentEmotions);
+			setEmotions(emotions);
 		}
 
-		outputs[ANGER_OUTPUT].setVoltage(currentEmotions.anger);
-		outputs[CONTEMPT_OUTPUT].setVoltage(currentEmotions.contempt);
-		outputs[DISGUST_OUTPUT].setVoltage(currentEmotions.disgust);
-		outputs[FEAR_OUTPUT].setVoltage(currentEmotions.fear);
-		outputs[HAPPYNESS_OUTPUT].setVoltage(currentEmotions.happyness);
-		outputs[NEUTRAL_OUTPUT].setVoltage(currentEmotions.neutral);
-		outputs[SADNESS_OUTPUT].setVoltage(currentEmotions.sadness);
-		outputs[SURPRISE_OUTPUT].setVoltage(currentEmotions.surprise);
+		for (int i = 0; i < NUM_OUTPUTS; i++) {
+			outputs[i].setVoltage(emotions[i]);
+		}
 
 		for (int i = 0; i < NUM_LIGHTS; i++) {
 			if (outputs[i].isConnected()) {
@@ -105,7 +99,7 @@ struct Mienophone : Module {
 		}
 	}
 
-	void setEmotion(emotions *currentEmotions) {
+	void setEmotions(float emotions[]) {
 		CURL *curl_handle;
 		CURLcode res;
 
@@ -152,28 +146,28 @@ struct Mienophone : Module {
 					printf("%s => %lf\n", key, value);
 
 					if(!strcmp(key, "anger")) {
-						currentEmotions->anger = (float) value;
+						emotions[Mienophone::ANGER] = (float) value;
 					}
 					if(!strcmp(key, "contempt")) {
-						currentEmotions->contempt = (float) value;
+						emotions[Mienophone::CONTEMPT] = (float) value;
 					}
 					if(!strcmp(key, "disgust")) {
-						currentEmotions->disgust = (float) value;
+						emotions[Mienophone::DISGUST] = (float) value;
 					}
 					if(!strcmp(key, "fear")) {
-						currentEmotions->fear = (float) value;
+						emotions[Mienophone::FEAR] = (float) value;
 					}
 					if(!strcmp(key, "happyness")) {
-						currentEmotions->happyness = (float) value;
+						emotions[Mienophone::HAPPYNESS] = (float) value;
 					}
 					if(!strcmp(key, "neutral")) {
-						currentEmotions->neutral = (float) value;
+						emotions[Mienophone::NEUTRAL] = (float) value;
 					}
 					if(!strcmp(key, "sadness")) {
-						currentEmotions->sadness = (float) value;
+						emotions[Mienophone::SADNESS] = (float) value;
 					}
 					if(!strcmp(key, "surprise")) {
-						currentEmotions->surprise = (float) value;
+						emotions[Mienophone::SURPRISE] = (float) value;
 					}
 				}
 			}
@@ -183,7 +177,6 @@ struct Mienophone : Module {
 		curl_easy_cleanup(curl_handle);
 		free(chunk.memory);
 	}
-
 };
 
 struct MienophoneWidget : ModuleWidget {
@@ -209,6 +202,5 @@ struct MienophoneWidget : ModuleWidget {
 		}
 	}
 };
-
 
 Model* modelMienophone = createModel<Mienophone, MienophoneWidget>("Mienophone");
