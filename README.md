@@ -28,7 +28,7 @@ https://mienophone.com/
 
 * build-essential
 * curl API
-* v4l ?? is cross-plattform incompatible
+* v4l - see [example code](https://gist.github.com/mike168m/6dd4eb42b2ec906e064d) but this is not cross-plattform compatible
 * [VCV Rack SDK](https://github.com/stellare-modular/vcv-rack-sdk)
 
 ```
