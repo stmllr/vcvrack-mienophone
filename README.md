@@ -1,5 +1,11 @@
 # VCV Plugin for Mienophone
 
+## Todo
+
+- [ ] non-blocking module or API requests (Multithreading / Async / ...)
+- [ ] webcam capture
+- [ ] clock/gate input
+
 ## What?
 
 ![Rack module](res/Mienophone.png)
