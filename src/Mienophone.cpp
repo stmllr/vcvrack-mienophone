@@ -8,7 +8,7 @@
 
 #define FACE_API "http://localhost:8080/face/v1.0/detect"
 #define BUFFER_SIZE (256 * 1024) /* 256 KB */
-#define BPM 120
+#define EMOTIONS_PER_MINUTE 60 // Image size is crucial for performance. API responses took ~800ms for posting a 60k image. 
 
 struct Mienophone : Module {
 	enum ParamIds {
@@ -79,14 +79,13 @@ struct Mienophone : Module {
 		return realsize;
 	}
 
-	unsigned long counter = 0;
+	float apiRequestPhase = 0.f;
 	float emotions[8] = {0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000};
 
 	void process(const ProcessArgs& args) override {
-		// BPM 120
-		// BPM / 60 = 2
-		// args.sampleRate / BPM/2
-		if (counter++ % (long) (args.sampleRate / (BPM / 60)) == 0) {
+		apiRequestPhase += args.sampleTime;
+		if (apiRequestPhase >= EMOTIONS_PER_MINUTE / 30.f) {
+			apiRequestPhase = 0.f;
 			setEmotions(emotions);
 		}
 
