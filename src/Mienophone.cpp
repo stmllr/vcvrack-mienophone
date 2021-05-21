@@ -8,7 +8,9 @@
 
 #include <sys/stat.h>
 
-#define FACE_API "http://localhost:8080/face/v1.0/detect"
+//#define FACE_API "http://localhost:8080/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=emotion"
+#define FACE_API "https://mienophone.cognitiveservices.azure.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&returnFaceAttributes=emotion"
+
 #define BUFFER_SIZE (256 * 1024) /* 256 KB */
 #define EMOTIONS_PER_MINUTE 60 // Image size is crucial for performance. API responses took ~800ms for posting a 60k image. 
 
@@ -120,6 +122,18 @@ struct Mienophone : Module {
 
 		/* set our custom set of headers */
 		struct curl_slist *curl_headers_chunk = NULL;
+
+		char token_header_prefix[] = "Ocp-Apim-Subscription-Key: ";
+		const char *token = getenv("AZURE_SECRET_TOKEN");
+		if (token == NULL || strlen(token) == 0) {
+			printf("Face API requires AZURE_SECRET_TOKEN to be set\n");
+			return;
+		}
+
+		char *token_header = strcat(token_header_prefix, token);
+		curl_headers_chunk = curl_slist_append(curl_headers_chunk, token_header);
+
+		/* Tell API that we're going to send binary payload */
 		curl_headers_chunk = curl_slist_append(curl_headers_chunk, "Content-Type: application/octet-stream");
 		curl_easy_setopt(curl_handle, CURLOPT_HTTPHEADER, curl_headers_chunk);
 
