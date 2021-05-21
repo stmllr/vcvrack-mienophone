@@ -27,6 +27,9 @@ trap 'INT' do
 end
 
 server.mount_proc '/face/v1.0/detect' do |req, res|
+    header = req.header
+    puts "Received #{header['content-length'][0]} bytes from #{header['user-agent'][0]}"
+
     res['Content-Type'] = 'application/json'
     res.body = random_result.to_json
 end
