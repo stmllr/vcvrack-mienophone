@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <sys/stat.h>
+
 #define FACE_API "http://localhost:8080/face/v1.0/detect"
 #define BUFFER_SIZE (256 * 1024) /* 256 KB */
 #define EMOTIONS_PER_MINUTE 60 // Image size is crucial for performance. API responses took ~800ms for posting a 60k image. 
@@ -117,9 +119,31 @@ struct Mienophone : Module {
 		curl_easy_setopt(curl_handle, CURLOPT_FOLLOWLOCATION, 1L);
 
 		/* set our custom set of headers */
-		//struct curl_slist *curl_headers_chunk = NULL;
-		//curl_headers_chunk = curl_slist_append(curl_headers_chunk, "Content-Type: application/octet-stream");
-		//curl_easy_setopt(curl_handle, CURLOPT_HTTPHEADER, curl_headers_chunk);
+		struct curl_slist *curl_headers_chunk = NULL;
+		curl_headers_chunk = curl_slist_append(curl_headers_chunk, "Content-Type: application/octet-stream");
+		curl_easy_setopt(curl_handle, CURLOPT_HTTPHEADER, curl_headers_chunk);
+
+		FILE *in_file;
+		const char* filename = "neutral.jpg";
+		in_file = fopen(filename, "rb");
+		if (!in_file) {
+			printf("Could not read file %s", filename);
+			return;
+		}
+
+		struct stat sb;
+		if (stat(filename, &sb) == -1) {
+			printf("Could not stat file %s", filename);
+			return;
+		}
+
+		char* image = (char *) malloc(sb.st_size);
+		fread(image, sb.st_size, 1, in_file);
+
+		curl_easy_setopt(curl_handle, CURLOPT_POSTFIELDS, image);
+		curl_easy_setopt(curl_handle, CURLOPT_POSTFIELDSIZE, sb.st_size);
+
+		fclose(in_file);
 
 		curl_easy_setopt(curl_handle, CURLOPT_USERAGENT, "vcv-mienophone/1.0");
 
@@ -128,6 +152,8 @@ struct Mienophone : Module {
 
 		/* we pass our 'chunk' struct to the callback function */
 		curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void *)&chunk);
+
+		printf("Sending Face API request...\n");
 
 		/* Perform the request, res will get the return code */
 		res = curl_easy_perform(curl_handle);
