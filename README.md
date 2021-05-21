@@ -2,7 +2,7 @@
 
 Once the todos below have been implemented, the Mienophone VCV plugin will:
  * capture pictures from a webcam
- * trade the pictures for emotion parameters using MS Face API (internet connection required)
+ * trade the pictures for emotion parameters using [MS Face API](https://westus.dev.cognitive.microsoft.com/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236) (internet connection required)
  * map emotion parameters onto module outputs.
 
 ## What?
@@ -21,6 +21,7 @@ https://mienophone.com/
 - [ ] fix memory leaks
 - [ ] cleanup the ugliness from shameless green code.
 - [ ] cross-plattform (mac/bsd)
+- [ ] test if this benefits from video streams instead of posting images 
 
 ## Build and Installation
 
