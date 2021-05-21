@@ -1,10 +1,9 @@
 # VCV Plugin for Mienophone
 
-## Todo
-
-- [ ] non-blocking module or API requests (Multithreading / Async / ...)
-- [ ] webcam capture
-- [ ] clock/gate input
+Once the todos below have been implemented, the Mienophone VCV plugin will:
+ * capture pictures from a webcam
+ * trade the pictures for emotion parameters using MS Face API (internet connection required)
+ * map emotion parameters onto module outputs.
 
 ## What?
 
@@ -14,16 +13,31 @@
 
 https://mienophone.com/
 
+## Todo
+
+- [ ] API requests must be non-blocking (Multithreading / Async / curl "hiper")
+- [ ] webcam capture (we could run this separately, e.g. `fswebcam -q -r 1280x720 --crop 480x720,500x0 capture.jpg`)
+- [ ] add clock/gate input
+- [ ] fix memory leaks
+- [ ] cleanup the ugliness from shameless green code.
+- [ ] cross-plattform (mac/bsd)
+
 ## Build and Installation
 
 ### Dependencies
 
 * build-essential
-* libcurl-dev
+* curl API
+* v4l ?? is cross-plattform incompatible
+* [VCV Rack SDK](https://github.com/stellare-modular/vcv-rack-sdk)
 
 ```
 apt install libcurl4-openssl-dev build-essential
+git clone https://github.com/stellare-modular/vcv-rack-sdk.git
+echo "export RACK_DIR=<Rack SDK folder>" >> ~/.bashrc
 ```
+
+See also [VCV Rack PluginDevelopmentTutorial](https://vcvrack.com/manual/PluginDevelopmentTutorial)
 
 ### Build Plugin
 
